@@ -1,0 +1,77 @@
+body { 
+  background: #333; 
+  font-family: Trebuchet MS, Verdana, Helvetica, Arial, san-serif; 
+  margin: 0; 
+  text-align: center; 
+}
+
+p { font-size: 12px; line-height: 20px; }
+a img { border: 0; }
+
+#wrapper { 
+  background: #750505 url('../images/bgWrapper.png') 8px 0 no-repeat;
+  border: solid #300; 
+  border-width: 0 15px 15px 15px; 
+  height: 700px; 
+  margin: 0 auto; 
+  position: relative; 
+  width: 730px; 
+}
+
+#logotypeLeft { left: -41px; position: absolute; top: 41px; z-index: 100; }
+#logotypeRight { left: 353px; position: absolute; top: 27px; z-index: 100; }
+
+#introPane{
+	background: #fff;
+	border:solid #300;
+	border-width: 15px 15px 15px 15px;
+	width: 317px;
+	height:187px;
+	position: absolute;	
+	left: 338px;
+	top: 15px;
+	padding: 100px 15px 0 15px;
+	text-align: left;
+}
+
+#detailsPane{
+	background: #fff url(../images/bgDetailPane.png) 115px 91px no-repeat;
+	border:solid #300;
+	border-width: 15px 15px 15px 15px;
+	width: 317px;
+	height:187px;
+	position: absolute;	
+	left: 338px;
+	top: 347px;
+	padding: 100px 15px 0 15px;
+	text-align: left;
+}
+
+#itemDetail{
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+#itemGuitar{
+	position: absolute;
+	left: 8px;
+	top: 221px;
+}
+#itemShades{
+	position: absolute;
+	left: 8px;
+	top: 326px;
+}
+#itemCowbell{
+	position: absolute;
+	left: 8px;
+	top: 414px;
+}
+#itemHat{
+	position: absolute;
+	left: 8px;
+	top: 540px;
+}
+
+#description { padding: 40px 0 0 0; }
