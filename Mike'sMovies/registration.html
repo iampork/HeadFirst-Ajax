@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Mike's Movies</title>
+		<link rel="stylesheet" type="text/css" href="css/movies.css"/>
+		<script src="scripts/utils.js" type="text/javascript" ></script>
+		<script src="scripts/validation.js" type="text/javascript" ></script>
+	</head>
+	<body>
+		<div id="wrapper">
+			<h1>Please register to access reviews:</h1>
+			<ul>
+				<li><label for="username">UserName:</label><input type="text" name="username" id="username" value="" /></li>
+				<li><label for="firstname">First Name:</label><input type="text" name="firstname" id="firstname" value="" /></li>
+				<li><label for="lastname">Last Name:</label><input type="text" name="lastname" id="lastname" value="" /></li>
+				<li><label for="Email">Email:</label><input type="text" name="email" id="email" value="" /></li>
+				<li><label for="genre">Favorite Genre:</label>
+					<select name="genre" id="genre">
+						<option value="Action">Action</option>
+						<option value="Adventure">Adventure</option>
+						<option value="Comedy">Comedy</option>
+						<option value="documentary">documentary</option>
+						<option value="Drama">Drama</option>
+					</select>
+				</li>
+				<li><label for="favorite">Favorite Movie:</label><input type="text" name="favorite" id="favorite" value="" /></li>
+				<li><label for="tastes">Describe your movie tastes:</label><textarea name="tastes" rows="2" cols="60" id="tastes"></textarea></li>
+				<li><label for="register"></label><input type="submit" name="register" id="register" value="Register" /></li>
+			</ul>
+		</div>
+	</body>
+</html>
