@@ -8,9 +8,18 @@ var frequencyTable = new Array(
   "r", "r", "r", "r", "r", "s", "s", "s", "s", "s", "s", "s", "s", "t", "t",
   "t", "u", "u", "v", "v", "w", "x", "y", "y","z");
   
-function initPage(){
-	randomizeTiles();
+function initPage() {
+  randomizeTiles();
+  var submitDiv = document.getElementById("submit");
+  var a = submitDiv.firstChild;
+  while (a.nodeName == "#text") {
+    a = a.nextSibling;
+  }
+  a.onclick = function() { 
+    alert("Please click tiles to add letters and create a word."); 
+  };
 }
+
 //随机获得字母
 function randomizeTiles(){
 	var tiles=document.getElementById("letterbox").getElementsByTagName("a");
@@ -48,60 +57,59 @@ function addLetter(){
 }
 
 //将选中单词传到 已选单词框中 并的出分数
-function submitWord(){
-	var request=createRequest();
-	if(request==null){
-		alert("unable to create request Objecct");
-		return;
-	}
-	var currentWordDiv=document.getElementById("currentWord");
-	var userWord=currentWordDiv.firstChild.nodeValue;
-	var url="lookup-word.php?word="+escape(userWord);
-	request.open("GET",url,false);
-	request.send(null);
-	
-	//获取选中的单词
-	if(request.responseText==-1){
-		alert("Try Again");
-	}else{
-		var wordList=document.getElementById("wordList");
-		var p=document.createElement("p");
-		wordList.appendChild(p);
-		var newWord=document.createTextNode(userWord);
-		p.appendChild(newWord);
-	
-	//更新分数显示的值
-	var scoreDiv=document.getElementById("score");
-	var scoreFirstnode=scoreDiv.firstChild.nodeValue;
-	var pieces=scoreFirstnode.split(" ");
-	var currentScore=parseInt(pieces[0]);
-	currentScore+=parseInt(request.responseText);
-	scoreFirstnode="Score:"+currentScore;
-	}
-	
-	//删除单词框的单词
-	var currentWordP=document.getElementById("currentWord").firstChild;
-	currentWordDiv.removeChild(currentWordP);
-	enableAllTiles();
-	var submitDiv=document.getElementById("submit");
-	var a=submitDiv.firstChild;
-	while(a.nodeName=="#text"){
-		a=a.nextSibling;
-	}
-	a.onclick=function(){
-		alert("Please click tiles to add letters and create new a word");
-	};
+function submitWord() {
+  var request = createRequest();
+  if (request == null) {
+    alert ("Unable to create request object.");
+    return;
+  }
+  var currentWordDiv = document.getElementById("currentWord");
+  var userWord = currentWordDiv.firstChild.firstChild.nodeValue;
+  var url = "lookup-word.php?word=" + escape(userWord);
+  request.open("GET", url, false);
+  request.send(null);
+
+  if (request.responseText == -1) {
+    alert("You have entered an invalid word. Try again!");
+  } else {
+    var wordListDiv = document.getElementById("wordList");
+    var p = document.createElement("p");
+    var newWord = document.createTextNode(userWord);
+    p.appendChild(newWord);
+    wordListDiv.appendChild(p);
+
+    var scoreDiv = document.getElementById("score");
+    var scoreNode = scoreDiv.firstChild;
+    var scoreText = scoreNode.nodeValue;
+    var pieces = scoreText.split(" ");
+    var currentScore = parseInt(pieces[1]);
+    currentScore += parseInt(request.responseText);
+    scoreNode.nodeValue = "Score: " + currentScore;
+  }
+  var currentWordP = currentWordDiv.firstChild;
+  currentWordDiv.removeChild(currentWordP);
+  enableAllTiles();
+  var submitDiv = document.getElementById("submit");
+  var a = submitDiv.firstChild;
+  while (a.nodeName == "#text") {
+    a = a.nextSibling;
+  }
+  a.onclick = function() {
+    alert("Please click tiles to add letters and create a word.");
+  };
 }
 
 //启用已被禁用的字母
-function enableAllTiles(){
-	tiles=document.getElementById("letterbox").getElementsByTagName("a");
-	for(i=0;i<tiles.length;i++){
-		var tileClass=tiles[i].className.split(" ");
-		if(tileClass.length==4){
-			var newClass=tileClass[0]+" "+tileClass[1]+" "+tileClass[2];
-			tiles[i].className=newClass;
-			tiles[i].onclick=addLetter;
-		}
-	}
+function enableAllTiles() {
+  tiles = document.getElementById("letterbox").getElementsByTagName("a");
+  for (i=0; i<tiles.length; i++) {
+    var tileClasses = tiles[i].className.split(" ");
+    if (tileClasses.length == 4) {
+      var newClass = 
+        tileClasses[0] + " " + tileClasses[1] + " " + tileClasses[2];
+      tiles[i].className = newClass;
+      tiles[i].onclick = addLetter;
+    }
+  }
 }
+
