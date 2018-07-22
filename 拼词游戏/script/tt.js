@@ -10,7 +10,15 @@ var frequencyTable = new Array(
   "t", "u", "u", "v", "v", "w", "x", "y", "y","z");
   
 function initPage(){
-	randomizeTiles()
+	randomizeTiles();
+	  var submitDiv = document.getElementById("submit");
+  var a = submitDiv.firstChild;
+  while (a.nodeName == "#text") {
+    a = a.nextSibling;
+  }
+  a.onclick = function() { 
+    alert("Please click tiles to add letters and create a word."); 
+  };
 }
 
 //随机获取16个字母
@@ -65,5 +73,46 @@ function submitWord(){
 	request.open("GET",url,false);
 	request.send();
 	alert(word);
-	alert("your sorce is:"+request.responseText);
+	alert(request.responseText);
+if (request.responseText == -1) {
+    alert("You have entered an invalid word. Try again!");
+  } else {
+    var wordListDiv = document.getElementById("wordList");
+    var p = document.createElement("p");
+    var newWord = document.createTextNode(word);
+    p.appendChild(newWord);
+    wordListDiv.appendChild(p);
+
+    var scoreDiv = document.getElementById("score");
+    var scoreNode = scoreDiv.firstChild;
+    var scoreText = scoreNode.nodeValue;
+    var pieces = scoreText.split(" ");
+    var currentScore = parseInt(pieces[1]);
+    currentScore += parseInt(request.responseText);
+    scoreNode.nodeValue = "Score: " + currentScore;
+  }
+  var currentWordP = currentWordDiv.firstChild;
+  currentWordDiv.removeChild(currentWordP);
+  enableAllTiles();
+  var submitDiv = document.getElementById("submit");
+  var a = submitDiv.firstChild;
+  while (a.nodeName == "#text") {
+    a = a.nextSibling;
+  }
+  a.onclick = function() {
+    alert("Please click tiles to add letters and create a word.");
+  };
+}
+
+function enableAllTiles() {
+  tiles = document.getElementById("letterbox").getElementsByTagName("a");
+  for (i=0; i<tiles.length; i++) {
+    var tileClasses = tiles[i].className.split(" ");
+    if (tileClasses.length == 4) {
+      var newClass = 
+        tileClasses[0] + " " + tileClasses[1] + " " + tileClasses[2];
+      tiles[i].className = newClass;
+      tiles[i].onclick = addLetter;
+    }
+  }
 }
