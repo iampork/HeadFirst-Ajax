@@ -14,3 +14,24 @@ function createRequest() {
   }	
   return request;
 }
+
+function addEventHandler(obj,eventName,handler){
+	if(obj.attachEvent){
+		obj.attachEvent("on"+eventName,handler);
+	}else if(obj.addEventListener){
+		obj.addEventListener(eventName,handler,false);
+	}
+}
+
+
+function getActivatedObject(e){
+	var obj;
+	if(!e){
+		obj=window.event.srcElement;
+	}else if(e.srcElement){
+		obj=e.srcElement;
+	}else{
+		obj=e.target;
+	}
+	return obj;
+}

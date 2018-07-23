@@ -13,22 +13,42 @@ function initPage(){
 	var images=document.getElementById("navigation").getElementsByTagName("a");
 		for(var i=0;i<images.length;i++){
 		var currentImage=images[i];
-		currentImage.onmouseover=showHint;
-		currentImage.onmouseout=hideHint;
+		addEventHandler(currentImage,"mouseover",showHint);
+		addEventHandler(currentImage,"mouseout",hideHint);
 		currentImage.onclick=showTab;
-		currentImage.onmouseover=function buttonOver(){
-			this.className="active";
+		addEventHandler(currentImage,"mouseover",buttonOver);
+		addEventHandler(currentImage,"mouseout",buttonOut);
+		function buttonOver(e){
+			var me =getActivatedObject(e);
+			me.className="active";
 		}
-		currentImage.onmouseout=function buttonOut(){
-			this.className="";
+		function buttonOut(e){
+			var me=getActivatedObject(e);
+			me.className="";
 		}
 	}
 }
 
-function showHint(){
+function showHint(e){
 	if(!welcomePaneShowing){
 		return;
 	}
+	var me=getActivatedObject(e);
+	switch(me.title){
+		case "beginners":
+		var showText="Just getting started? Come join us!";
+		break;
+		case "intermediate":
+		var showText="Take your flexibility to the next level!";
+		break;
+		case "advanced":
+		var showText="Perfectly join your body and mind";
+		break;
+		default:
+		var showText="Click a tab to display the course schedule for the class";
+	}
+	var showContent=document.getElementById("content");
+	showContent.innerHTML="<h3>"+showText+"</h3>"
 }
 
 function hideHint(){
@@ -39,8 +59,9 @@ function hideHint(){
 }
 
 
-function showTab(){
-	var selectedTab=this.title;
+function showTab(e){
+	var me=getActivatedObject(e);
+	var selectedTab=me.title;
 	var tabs=document.getElementById("tabs").getElementsByTagName("a");
 	for(var i=0;i<tabs.length;i++){
 		var currentTab=tabs[i];
