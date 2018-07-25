@@ -40,12 +40,10 @@ function addEventHandler(obj, eventName, handler) {
 }
 
 //判断变量是否是数组
-
-function isArray(arg) {
-  if (typeof arg == 'object') {
-    var criteria = arg.constructor.toString().match(/array/i);
-    return (criteria != null);
-  }
-  return false;
+function isArry(arr){
+	if(typeof(arr)=="object"){
+		var criteria=arr.construtor.toString().match(/array/i);
+		return (criteria!=null);
+	}
+	return false;
 }
-
