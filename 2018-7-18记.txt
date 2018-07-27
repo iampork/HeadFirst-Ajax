@@ -1,0 +1,56 @@
+1、
+问题描述：看一个函数时直接用substr(截取位置,截取长度)的返回值与一个数值作比较，字符串能与number直接运算？
+js中如果是只有数字的字符串如：var a="67";a和其他number型变量进行加减换算，js会把a自动转成number型进行运算；并且返回number型结果例如：
+window.onload=function tt(){
+	var a="12",b=23;
+	var c=a-b;
+	var d=a*b;
+	alert(c); // 返回-11
+	alert(d); // 返回276
+	alert(a+b);// 返回35
+	alert(typeof(c));//number
+	alert(typeof(d));//number
+}
+2、
+问题描述：写一个节点互换的函数；
+function swapTiles(selectedCell,destinationCell){
+	var selectedImg=selectedCell.firstChild;
+	while(selectedImg.nodeName=="#text"){
+		selectedImg=selectedImg.nextSibling;
+	}
+	var destinationImg=destinationCell.firstChild;
+	while(destinationImg.nodeName=="#text"){
+		destinationImg=destinationImg.nextSibling;
+	}
+	destinationCell.appendChild(selectedImg);
+	selectedCell.appendChild(destinationImg);
+	if(puzzleIsComplete()){
+		document.getElementById("puzzleGrid").className="win";
+	}
+}；为啥使用appendChild（）方法后发现 选择的节点 从它父级里消失了？？
+js中appendChild()方法：appendChild() 方法向节点添加最后一个子节点。
+
+提示：如果您需要创建包含文本的新段落，请记得添加到段落的文本的文本节点，然后向文档添加该段落。
+
+您也可以使用 appendChild() 方法从一个元素向另一个元素中移动元素。
+
+注意：如果用appendChild()添加DOM结构树中已存在的元素节点产生的效果 是 移动该 元素节点
+
+3、
+问题描述：同上函数；
+function swapTiles(selectedCell,destinationCell){
+	var selectedImg=selectedCell.firstChild;
+	if(selectedImg.nodeName=="#text"){
+		selectedImg=selectedImg.nextSibling;
+	}
+	var destinationImg=destinationCell.firstChild;
+	if(destinationImg.nodeName=="#text"){
+		destinationImg=destinationImg.nextSibling;
+	}
+	destinationCell.appendChild(selectedImg);
+	selectedCell.appendChild(destinationImg);
+	if(puzzleIsComplete()){
+		document.getElementById("puzzleGrid").className="win";
+	}
+};如果把while换成if后，发现只做了一次判断如果destinationImg.nodeNam=="#text"目标节点的下一个节点还是"#text"依旧无法完成判断。
+查阅相关资料后才明白：js中 while和if的区别：while循环多次直到满足条件；而if只做一次判断；
